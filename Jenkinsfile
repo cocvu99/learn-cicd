@@ -45,7 +45,6 @@ pipeline {
                                 DOCKER_USERNAME: "${DOCKER_USERNAME}",
                                 DOCKER_PASSWORD:  "${DOCKER_PASSWORD}"
                             ]
-                        )
                     }
                 }
             }
