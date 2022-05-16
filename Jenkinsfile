@@ -37,7 +37,7 @@ pipeline {
                         inventory: 'hosts',
                         become: 'yes',
                         extraVars: [
-                            DOCKER_USERNAME: "${DOCKER_USERNAME}"
+                            DOCKER_USERNAME: "${DOCKER_USERNAME}",
                             DOCKER_PASSWORD: "${DOCKER_PASSWORD}"
                         ]
                     )
