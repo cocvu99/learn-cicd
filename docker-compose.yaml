@@ -1,6 +1,6 @@
 version: "3.3"
 services:
 app:
-image: ddthuong/nginx:latest
+image: cocvu99/nginx:latest
 ports:
 - "80:80"
