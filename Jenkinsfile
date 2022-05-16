@@ -40,7 +40,7 @@ pipeline {
                             credentialsId: 'private_key',
                             playbook: 'playbook.yml',
                             inventory: 'hosts',
-                            become: 'yes'
+                            become: 'yes')
                             extraVars: [
                                 DOCKER_USERNAME: "${DOCKER_USERNAME}",
                                 DOCKER_PASSWORD:  "${DOCKER_PASSWORD}"
