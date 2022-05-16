@@ -18,8 +18,7 @@ pipeline {
                 docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
                 docker image ls | grep ${DOCKER_IMAGE}'''
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                sh 'echo $DOCKER_PASSWORD | docker login --username
-                $DOCKER_USERNAME --password-stdin'
+                sh 'echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin'
                 sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 sh "docker push ${DOCKER_IMAGE}:latest"
                 }
@@ -33,19 +32,17 @@ pipeline {
                     timeout(time: 10, unit: 'MINUTES')
                 }
                 steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub',
-                usernameVariable: 'DOCKER_USERNAME', passwordVariable:
-                'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 ansiblePlaybook(
-                credentialsId: 'private_key',
-                playbook: 'playbook.yml',
-                inventory: 'hosts',
-                become: 'yes',
-                extraVars: [
-                DOCKER_USERNAME: "${DOCKER_USERNAME}",
-                DOCKER_PASSWORD: "${DOCKER_PASSWORD}"
-                ]
-                )
+                    credentialsId: 'private_key',
+                    playbook: 'playbook.yml',
+                    inventory: 'hosts',
+                    become: 'yes',
+                    extraVars: [
+                        DOCKER_USERNAME: "${DOCKER_USERNAME}",
+                        DOCKER_PASSWORD: "${DOCKER_PASSWORD}"
+                        ]
+                    )
                 }
                 }
             }
